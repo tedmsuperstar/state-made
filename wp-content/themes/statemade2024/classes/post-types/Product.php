@@ -36,7 +36,9 @@ class Product {
 		$args = array(
 			'labels' => $labels,
 			'public' => true,
+
 			'publicly_queryable' => true,
+			'show_in_rest' => true,
 			'show_ui' => true,
 			'query_var' => true,
 			'capability_type' => 'post',

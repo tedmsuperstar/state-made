@@ -1,21 +1,32 @@
-import ProductCardList from "./components/ProductCardList";
+import { useEffect, useState } from 'react'
+import ProductCardList from "./components/ProductCardList"
 import './App.css'
 
 
+function getList() {
+  return fetch('http://localhost:8881/wp-json/state-made/v1/product/explore')
+    .then(data => data.json())
+}
+
 function App() {
 
-  const cards = [
-    {name: "Greenland Whale", brand: "Whales", displayPrice:"$999.99", image1x:"https://upload.wikimedia.org/wikipedia/commons/5/5c/GreenlandWhaleLyd3.jpg", image2x:"https://upload.wikimedia.org/wikipedia/commons/5/5c/GreenlandWhaleLyd3.jpg",displayLocation:"California",url:"https://www.google.com"},
+  //http://localhost:8881/wp-json/wp/v2/product
 
-    {name: "Whale Skeleton", brand: "Whales", displayPrice:"$199.99", image1x:"https://upload.wikimedia.org/wikipedia/commons/8/8d/Sperm_whale_skeleton_labelled.jpg", image2x:"https://upload.wikimedia.org/wikipedia/commons/8/8d/Sperm_whale_skeleton_labelled.jpg",displayLocation:"Connecticut",url:"https://www.google.com"},
-
-    {name: "Baleen", brand: "Whales", displayPrice:"$99.99", image1x:"https://upload.wikimedia.org/wikipedia/commons/5/5c/GreenlandWhaleLyd3.jpg", image2x:"https://upload.wikimedia.org/wikipedia/commons/5/5c/GreenlandWhaleLyd3.jpg",displayLocation:"California",url:"https://upload.wikimedia.org/wikipedia/commons/2/28/Baleen_parts.png"},
-]
-
+  const [list, setList] = useState([]);
+  
+  useEffect(() => {
+    let mounted = true;
+    getList()
+      .then(items => {
+        if(mounted) {
+          setList(items)
+        }
+      })
+  }, [])
 
   return (
     <>
-      <ProductCardList cards={cards}/>
+      <ProductCardList list={list} />
     </>
   )
 }

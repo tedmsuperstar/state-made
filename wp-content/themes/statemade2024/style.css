@@ -6,3 +6,16 @@ Version: 0.0.1
 Text Domain: state-made-2024
 Template: twentytwentyfour
 */
+
+:root {
+    --wp--style--global--content-size: 620px;
+    --wp--style--global--wide-size: 100%;
+}
+
+body {
+    
+}
+
+.wp-site-blocks {
+    width:100%;
+}
